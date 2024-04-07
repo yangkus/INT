@@ -1,41 +1,39 @@
 {
-  "program": "p4src/pint.p4",
-  "switch": "simple_switch",
-  "compiler": "p4c",
-  "options": "--target bmv2 --arch v1model --std p4-16",
-  "switch_cli": "simple_switch_CLI",
-  "cli": true,
-  "pcap_dump": false,
-  "enable_log": false,
-  "topo_module": {
-    "file_path": "",
-    "module_name": "p4utils.mininetlib.apptopo",
-    "object_name": "AppTopoStrategies"
+  "program": "p4src/pint.p4", // P4程序的路径
+  "switch": "simple_switch", // 使用的交换机类型
+  "compiler": "p4c", // P4程序的编译器
+  "options": "--target bmv2 --arch v1model --std p4-16", // 编译器选项
+  "switch_cli": "simple_switch_CLI", // 交换机的命令行接口
+  "cli": true, // 是否启用命令行接口
+  "pcap_dump": false, // 是否启用pcap包转储
+  "enable_log": false, // 是否启用日志
+  "topo_module": { // 拓扑模块配置
+    "file_path": "", // 模块文件路径
+    "module_name": "p4utils.mininetlib.apptopo", // 模块名
+    "object_name": "AppTopoStrategies" // 对象名
   },
-  "controller_module": null,
-  "topodb_module": {
-    "file_path": "",
-    "module_name": "p4utils.utils.topology",
-    "object_name": "Topology"
+  "controller_module": null, // 控制器模块配置（此处未使用）
+  "topodb_module": { // 拓扑数据库模块配置
+    "file_path": "", // 文件路径
+    "module_name": "p4utils.utils.topology", // 模块名
+    "object_name": "Topology" // 对象名
   },
-  "mininet_module": {
-    "file_path": "",
-    "module_name": "p4utils.mininetlib.p4net",
-    "object_name": "P4Mininet"
+  "mininet_module": { // Mininet模块配置
+    "file_path": "", // 文件路径
+    "module_name": "p4utils.mininetlib.p4net", // 模块名
+    "object_name": "P4Mininet" // 对象名
   },
-  "topology": {
-    "assignment_strategy": "l2",
-    "auto_arp_tables": true,
-    "links": [["h1", "s1"], ["h2", "s1"]],
-    "hosts": {
-      "h1": {
-      },
-      "h2": {
-      }
+  "topology": { // 网络拓扑配置
+    "assignment_strategy": "l2", // 分配策略
+    "auto_arp_tables": true, // 是否自动配置ARP表
+    "links": [["h1", "s1"], ["h2", "s1"]], // 主机与交换机之间的连接
+    "hosts": { // 主机配置
+      "h1": {}, // 主机h1配置
+      "h2": {}  // 主机h2配置
     },
-    "switches": {
-      "s1": {
-	     "cli_input": "s1-commands.txt"
+    "switches": { // 交换机配置
+      "s1": { // 交换机s1配置
+         "cli_input": "s1-commands.txt" // CLI输入文件
       }
     }
   }
