@@ -129,13 +129,20 @@ class Experiment:  # 定义一个名为Experiment的类
 					# 启动接收者
 					simple_controller = "./mx {0} sudo python recv.py {1}"
 					recv_job = Popen(simple_controller.format(receiver, "experiments/" + exp_name + "/" + str(total_runs) + "/" + str(self.max_bit_range)), shell=True)
-
+					# simple_controller是一个格式化的字符串，用于构建执行接收脚本recv.py的命令。这个命令使用了mx工具（通常用于Mininet或类似环境中执行特定主机上的命令），sudo提升权限，以及python来执行Python脚本。
+					# {0}将被替换成接收者的主机名，例如h1。
+					# {1}将被替换成记录实验数据的路径，包括实验名称、当前的运行次数和最大比特范围。
+					# 使用Popen函数执行这个命令，实际上是在指定的接收者主机上启动recv.py脚本，准备接收数据包。
+					# shell=True参数允许命令在shell中执行，这样可以使用shell的特性，如管道、文件重定向等。
 					time.sleep(2)  # 暂停2秒
 
 					# 启动发送者
 					sender_ = "./mx {0} sudo python send.py"
 					send_job = Popen(sender_.format(sender), shell=True)
-
+					# 这段几乎与启动接收者的代码相似，但是这里是用来启动发送者脚本send.py。
+					# {0}将被替换成发送者的主机名，例如h0。
+					# 这个命令同样使用Popen函数执行，目的是在指定的发送者主机上启动send.py脚本，开始发送数据包到网络中。
+	 
 					while True:  # 再次使用无限循环
 						if send_job.poll() is None:  # 检查发送进程是否结束
 							time.sleep(3)  # 暂停3秒
